@@ -44,6 +44,13 @@ public class PlaylistController {
 
 		return Map.of("url", url,
 				"state", state);
+		/*
+		 * {
+		 * "url": "https://accounts.spotify.com/authorize?<params>",
+		 * "state": "<state>"
+		 * }
+		 * ⬆️ is what this endpoint returns
+		 */
 	}
 
 	private static String encode(String val) {

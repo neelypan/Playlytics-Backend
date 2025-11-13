@@ -1,0 +1,72 @@
+HELP.md
+.gradle
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Compiled ###
+*.class
+target/
+**/target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Temp / backups ###
+*~
+*.tmp
+*.temp
+*.bak
+*.orig
+*.swp
+*.swo
+
+### Logs ###
+logs/
+*.log
+
+### Environment ###
+.env
+.env.*
+.envrc
+
+### OS ###
+.DS_Store
+Thumbs.db

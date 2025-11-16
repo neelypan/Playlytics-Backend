@@ -66,6 +66,7 @@ logs/
 .env
 .env.*
 .envrc
+*.env
 
 ### OS ###
 .DS_Store

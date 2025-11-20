@@ -2,15 +2,15 @@ HELP.md
 .gradle
 build/
 **/build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### Compiled ###
+# Allow Gradle Wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+### Java / Build Artifacts ###
 *.class
 target/
 **/target/
-*.jar
+
 *.war
 *.ear
 *.zip

@@ -83,10 +83,7 @@ public class PlaylistController {
 	@PostMapping("/auth/exchange")
 	public Map<String, Object> exchangeCodes(@RequestHeader("X-Frontend-Api-Key") String apiKey,
 			@RequestBody Map<String, String> body) {
-		final String expectedKey = resolveKey(frontendApiKey, "FRONTEND_API_KEY");
-		if (!expectedKey.equals(apiKey)) { // if it isn't correct give unauthorized response instead of the url
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
-		}
+		checkApiKey(apiKey);
 
 		String code = body.get("code");
 		String state = body.get("state");
@@ -108,6 +105,20 @@ public class PlaylistController {
 		this.tempState = null;
 
 		return tokens;
+	}
+
+	@PostMapping("/auth/refresh")
+	public Map<String, Object> refreshCodes(@RequestHeader("X-Front-Api-Key") String apiKey, @RequestBody Map<String, String> body) {
+		checkApiKey(apiKey);
+
+		
+	}
+
+	private static void checkApiKey(String apiKey) {
+		final String expectedKey = resolveKey(frontendApiKey, "FRONTEND_API_KEY");
+		if (!expectedKey.equals(apiKey)) { // if it isn't correct give unauthorized response instead of the url
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+		}
 	}
 
 	private static String encode(String val) {

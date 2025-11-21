@@ -20,9 +20,11 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/api")
 public class PlaylistController {
 	private final SpotifyAuthService spotifyAuthService;
+	private final RefreshTokenService refreshTokenService;
 
-	public PlaylistController(SpotifyAuthService spotifyAuthService) {
+	public PlaylistController(SpotifyAuthService spotifyAuthService, RefreshTokenService refreshTokenService) {
 		this.spotifyAuthService = spotifyAuthService;
+		this.refreshTokenService = refreshTokenService;
 	}
 
 	@GetMapping("/health")
@@ -83,7 +85,7 @@ public class PlaylistController {
 	@PostMapping("/auth/exchange")
 	public Map<String, Object> exchangeCodes(@RequestHeader("X-Frontend-Api-Key") String apiKey,
 			@RequestBody Map<String, String> body) {
-		checkApiKey(apiKey);
+		checkApiKey(frontendApiKey, apiKey);
 
 		String code = body.get("code");
 		String state = body.get("state");
@@ -100,6 +102,9 @@ public class PlaylistController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid state");
 		}
 
+		System.out.println("Recieved code: " + code);
+		System.out.println("Recieved State: " + state);
+
 		// update with act values after we get them
 		final Map<String, Object> tokens = spotifyAuthService.exchangeCodeForTokens(code);
 		this.tempState = null;
@@ -108,13 +113,23 @@ public class PlaylistController {
 	}
 
 	@PostMapping("/auth/refresh")
-	public Map<String, Object> refreshCodes(@RequestHeader("X-Front-Api-Key") String apiKey, @RequestBody Map<String, String> body) {
-		checkApiKey(apiKey);
+	public Map<String, Object> refreshCodes(@RequestHeader("X-Frontend-Api-Key") String apiKey,
+			@RequestBody Map<String, String> body) {
+		checkApiKey(frontendApiKey, apiKey);
 
-		
+		final String refreshToken = body.get("refresh_token");
+
+		if (refreshToken == null || refreshToken.isEmpty())
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "refresh token is required");
+
+		System.out.println("Recieved refresh token: " + refreshToken);
+
+		final Map<String, Object> tokens = refreshTokenService.refreshTokens(refreshToken);
+
+		return tokens;
 	}
 
-	private static void checkApiKey(String apiKey) {
+	private static void checkApiKey(String frontendApiKey, String apiKey) {
 		final String expectedKey = resolveKey(frontendApiKey, "FRONTEND_API_KEY");
 		if (!expectedKey.equals(apiKey)) { // if it isn't correct give unauthorized response instead of the url
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");

@@ -19,10 +19,10 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/api")
 public class PlaylistController {
-	private final SpotifyAuthService spotifyAuthService;
+	private final ExchangeCodesService spotifyAuthService;
 	private final RefreshTokenService refreshTokenService;
 
-	public PlaylistController(SpotifyAuthService spotifyAuthService, RefreshTokenService refreshTokenService) {
+	public PlaylistController(ExchangeCodesService spotifyAuthService, RefreshTokenService refreshTokenService) {
 		this.spotifyAuthService = spotifyAuthService;
 		this.refreshTokenService = refreshTokenService;
 	}

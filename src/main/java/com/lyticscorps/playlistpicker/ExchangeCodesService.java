@@ -17,7 +17,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 
 @Service
-public class SpotifyAuthService {
+public class ExchangeCodesService {
     @Value("${SPOTIFY_CLIENT_ID}")
     private String clientId;
     @Value("${SPOTIFY_CLIENT_SECRET}")

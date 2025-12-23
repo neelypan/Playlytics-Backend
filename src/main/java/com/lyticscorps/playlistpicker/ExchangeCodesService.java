@@ -50,6 +50,7 @@ public class ExchangeCodesService {
                 new ParameterizedTypeReference<Map<String, Object>>() {
                 });
 
+        System.out.println(res.getBody());
         return res.getBody();
     }
 }

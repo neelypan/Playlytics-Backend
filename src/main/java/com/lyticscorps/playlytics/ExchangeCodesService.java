@@ -1,4 +1,4 @@
-package com.lyticscorps.playlistpicker;
+package com.lyticscorps.playlytics;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

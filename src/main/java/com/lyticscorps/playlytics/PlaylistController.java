@@ -1,4 +1,4 @@
-package com.lyticscorps.playlistpicker;
+package com.lyticscorps.playlytics;
 
 import java.util.Map;
 import java.util.UUID;

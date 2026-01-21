@@ -1,4 +1,4 @@
-package com.lyticscorps.playlistpicker;
+package com.lyticscorps.playlytics;
 
 import java.util.Base64;
 import java.util.Map;

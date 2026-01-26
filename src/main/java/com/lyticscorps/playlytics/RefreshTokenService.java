@@ -24,6 +24,16 @@ public class RefreshTokenService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * Refreshes Spotify access tokens using a refresh token.
+     * Makes a POST request to the Spotify token endpoint with Base64-encoded
+     * credentials.
+     * Includes the original refresh token in the response.
+     *
+     * @param refreshToken the refresh token previously obtained from Spotify
+     * @return a map containing the new access token and other token details, with
+     *         refresh_token included
+     */
     public Map<String, Object> refreshTokens(String refreshToken) {
         String creds = clientId + ":" + clientSecret;
         String encodedCreds = Base64.getEncoder().encodeToString(creds.getBytes());

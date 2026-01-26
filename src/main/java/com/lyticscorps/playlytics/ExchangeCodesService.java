@@ -27,6 +27,15 @@ public class ExchangeCodesService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * Exchanges a Spotify authorization code for access and refresh tokens.
+     * Makes a POST request to the Spotify token endpoint with Base64-encoded
+     * credentials.
+     *
+     * @param code the authorization code received from Spotify
+     * @return a map containing the token response with keys like "access_token",
+     *         "refresh_token", etc.
+     */
     @SuppressWarnings("null")
     public Map<String, Object> exchangeCodeForTokens(String code) {
         String creds = clientId + ":" + clientSecret;

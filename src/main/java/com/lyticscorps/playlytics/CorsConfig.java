@@ -6,6 +6,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
+    /**
+     * Configures CORS (Cross-Origin Resource Sharing) mappings for the application.
+     * Allows requests from local development servers on ports 3000 and 5173.
+     * Restricts allowed methods to GET, POST, and OPTIONS.
+     * Requires the X-Frontend-Api-Key header for API requests.
+     *
+     * @param registry the CORS registry to configure
+     */
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
